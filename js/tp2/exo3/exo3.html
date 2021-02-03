@@ -46,9 +46,13 @@
 				e.target.innerHTML = "BANG! X: "+squareX; 	
 			}, false);
 		speedX = speedInPxPs / fps; //100px per seconds and 30fps => 3px per frame (approx)
-		intervalId = window.setInterval(gameLoop,1000/fps); // 30fps
+		intervalId = window.setInterval(attente,2000); 
 	}
 
+	function attente (){
+		window.clearInterval(intervalID);
+		intervalId = window.setInterval(gameLoop,1000/fps); // 30fps
+    }
 	function endGame(){
 		window.clearInterval(intervalId);	
 	}

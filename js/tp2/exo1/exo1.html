@@ -1,36 +1,31 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8" />
-  <title>setInterval/clearInterval example</title>
+	<head>
+		<style type="text/css">
+		</style>
+		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
+		<script>
+            var num = 10;
+            
+			function compteur(){
+                affichage();
+                if (num == 0){
+                    resetNum();
+                }
+                num = num - 1;
+            }
+            function affichage(){
+                body.innerHTML= num; 
+            }
+            var intervalID = window.setInterval(compteur,1000);
 
-  <script>
-    var nIntervId;
-
-    function changeColor() {
-      nIntervId = setInterval(flashText, 1000);
-    }
-
-    function flashText() {
-      var oElem = document.getElementById('my_box');
-      if(oElem.style.color === 'red') {
-        oElem.style.color = 'blue'
-      } else {
-        oElem.style.color = 'red'
-      }
-    }
-
-    function stopTextColor() {
-      clearInterval(nIntervId);
-    }
-  </script>
-</head>
-
-<body onload="changeColor();">
-  <div id="my_box">
-    <p>Hello World</p>
-  </div>
-
-  <button onclick="stopTextColor();">Stop</button>
-</body>
+            function resetNum(){
+                affichage();
+                window.clearInterval(intervalID);
+            }
+            
+		</script>
+	</head>
+	<body id="body" onload='compteur()'>
+	</body>
 </html>
+
