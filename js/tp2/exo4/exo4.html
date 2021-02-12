@@ -1,74 +1,95 @@
 <html>
 	<head>
-		<SCRIPT LANGUAGE="Javascript" SRC="geometrie/point.js"></SCRIPT>
-		<SCRIPT LANGUAGE="Javascript" SRC="personnes/personne.js"></SCRIPT>
-		<SCRIPT LANGUAGE="Javascript" SRC="voitures/voiture.js"></SCRIPT>
-		<script type="text/javascript">
-			function init()
-			{
-				
-				canvas = document.getElementById('myCanvas');
-				for(i=1;i<10;i++)
-				{
-					for(j=1;j<10;j++)
-					{
-						point1 = new Point(20*i,20*j,canvas);
-						point1.ache();
+		<style type="text/css">
+		</style>
+		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
+		<script>
+            let dmove1 = 0;
+            let dmove2 = 0;
+            let dmove3 = 0;
+            let aCanvas;
+            let interval1ID;
+            let interval2ID;
+            let interval3ID;
+            let interval4ID;
+            let interval5ID;
+            let interval6ID;
+			let context;
+			let temp
 
-					}				
-				}
-				//============
-				console.log(personne.nom);
-				console.log(personne.nom[0]);
-				console.log(personne.age);
-				console.log(personne.interets[1]);
-				console.log(personne.bio());
-				console.log(personne.salutation());
-				//==============
-				var monObj = new Object(),
-    			str = "myString",
-    			rand = Math.random(),
-    			obj = new Object();
-
-				monObj.type              = "Syntaxe point";
-				monObj["date created"]   = "Chaîne avec un espace";
-				monObj[str]              = "Une valeur qui est une chaîne";
-				monObj[rand]             = "Nombre aléatoire";
-				monObj[obj]              = "Objet";
-				monObj[""]               = "Une chaîne vide";
-
-				console.log(monObj);	
-				console.log(monObj.obj);
-
-				for(objectToInspect = obj; objectToInspect !== null; objectToInspect = Object.getPrototypeOf(objectToInspect)){
-    					console.log("[info] "+Object.getOwnPropertyNames(objectToInspect));
-  				}
-
-
-				//==============
-				var maVoiture = new Voiture('Eagle','Talon TSi', 1993);
-				//==============
-			
-				class Rectangle {
-  					constructor(hauteur, largeur) {
-    					this.hauteur = hauteur;
-    					this.largeur = largeur;
-  					}
-  					get area() {
-    					return this.calcArea();
-  					}
-
-  					calcArea() {
-    					return this.largeur * this.hauteur;
-  					}
-				}
-				const carré = new Rectangle(10, 10);
-				console.log(carré.area);
-				
+            function start() {
+				aCanvas = document.getElementById('myCanvas');
+                context = aCanvas.getContext('2d');
+                context.fillStyle = 'black';
+                context.fillRect(dmove1, 20, 50, 50);
+                interval1ID = window.setInterval(wait1,4000);
 			}
+			
+            function wait1 (){
+                window.clearInterval(intervalID);
+                interval2ID = window.setInterval(wait2,1000);
+                interval3ID = window.setInterval(draw1,100);
+            }
+            function wait2 (){
+                window.clearInterval(interval2ID);
+                interval5ID = window.setInterval(wait3,1000);
+                interval4ID = window.setInterval(draw2,100);
+            }
+            function wait3 (){
+                window.clearInterval(interval5ID);
+                interval6ID = window.setInterval(draw3,100);
+            }
+
+            function draw1() {
+				temp +=100;
+                showRectangle(dmove1);
+                if (dmove1 == 550){
+                    reset();
+                }
+                dmove1 = dmove1 + 10;
+            }
+
+			function draw2() {
+				temp +=100;
+				showRectangle(dmove2);
+				if (dmove2 == 550){
+					reset();
+				}
+				dmove2 = dmove2 + 10;
+			}
+
+			function draw3() {
+				temp +=100;
+				showRectangle(dmove3);
+				if (dmove3 == 550){
+					reset();
+				}
+				dmove3 = dmove3 + 10;
+			}
+            
+			function showRectangle(x){
+                context.fillStyle = 'black';
+                context.clearRect(x-10, 20, 50, 50);
+                context.fillRect(x, 20, 50, 50);
+            }
+
+            function reset1(){
+                showRectangle(dmove1);
+                window.clearInterval(interval3ID);
+			}
+			function reset2(){
+                showRectangle(dmove2);
+                window.clearInterval(interval4ID);
+			}
+			function reset3(){
+                showRectangle(dmove3);
+                window.clearInterval(interval6ID);
+            }
+            
 		</script>
-	</head>
-	<body onload="init()"> 
-		<canvas id="myCanvas" width="200" height="200"/>
+    </head>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+	<body id="body" onload='start()'>
 	</body>
 </html>
+
